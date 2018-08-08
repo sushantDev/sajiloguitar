@@ -925,7 +925,6 @@ var app = new Vue({
                     
                     
                     
-                    
                     C#m7    B   E            C#m7  B    E
                     Sahara bani deu timi mero khusi bani deu
                     C#m7    B   E            C#m7  B    E
@@ -1088,7 +1087,8 @@ var app = new Vue({
         slider : false,
         showCloseIcon : false,
         song_id : 0,
-        search : ''
+        search : '',
+        isInternet: false
     },
     mounted () {
         var vars = {};
@@ -1096,7 +1096,15 @@ var app = new Vue({
             vars[key] = value;
         });
         this.song_id = vars;
-        console.log(this.song_id);
+
+        if(navigator.onLine){
+            this.isInternet = true;
+        } else {
+            this.isInternet = false;
+        }
+
+        if(localStorage.songs)
+            this.songs = JSON.parse(localStorage.songs);
     },
     computed: {
         queriedSongs: function () {
@@ -1111,17 +1119,13 @@ var app = new Vue({
         },
         favouritedSongs: function () {
             var self = this;
-            console.log('1');
             return this.songs.filter (
                 function (value) {
-                    console.log(value.favoured);
                     if ( value.favoured == true){
                         lowerCaseValue = value.name.toLowerCase();
-                        console.log(lowerCaseValue);
                     } else {
                         return null;
                     }
-                    console.log(1);
                     lowerCaseSearchInput = self.search.toLowerCase();
                     return (lowerCaseValue.indexOf(lowerCaseSearchInput) !== -1);
                 }
@@ -1156,8 +1160,13 @@ var app = new Vue({
             this.showCloseIcon = false;
         },
         addFavourite: function (id) {
-            var self = this;
-            self.songs[id].favoured = true;
+            if (this.songs[id].favoured == false) {
+                this.songs[id].favoured = true;
+            } else {
+                this.songs[id].favoured = false;
+            }
+            
+            localStorage.songs = JSON.stringify(this.songs);
         }
     }
 })

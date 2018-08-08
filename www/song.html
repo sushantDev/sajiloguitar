@@ -29,7 +29,8 @@
                     <span class="uk-margin-left" v-if="songs.length">{{songs[song_id.id].name}}</span>
                 </div>
                 <div class="uk-navbar-right">
-                    <a v-on:click="addFavourite(song_id.id)" class="uk-margin-right" uk-icon="heart"></a>
+                    <a v-on:click="addFavourite(song_id.id)" class="uk-margin-right" uk-icon="heart" v-if="!songs[song_id.id].favoured"></a>
+                    <a v-on:click="addFavourite(song_id.id)" class="uk-margin-right" style="color: red;" uk-icon="heart" v-else></a>
                     <span class="uk-margin-right" v-on:click="showSlider" uk-icon="future"></span>
                 </div>
             </nav>
@@ -64,9 +65,10 @@
                     {{ songs[song_id.id].cords }}
                 </pre>
             </div>
-            <div class="uk-card-footer">
+            <div class="uk-card-footer" >
                 <h3>Watch Video</h3>
-                <iframe v-bind:src="songs[song_id.id].url" width="560" height="315" frameborder="0" allowfullscreen uk-responsive uk-video="autoplay: false"></iframe>
+                <iframe v-if="isInternet" v-bind:src="songs[song_id.id].url" width="560" height="315" frameborder="0" allowfullscreen uk-responsive uk-video="autoplay: false"></iframe>
+                <p v-else>Please Enable your Internet connection for video.</p>
             </div>
         </div>
     </div>
