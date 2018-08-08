@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Sajilo Guitar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="css/uikit.min.css" />
+</head>
+<body>
+    <div id="app">
+        <div id="offcanvas-slide" uk-offcanvas>
+            <div class="uk-offcanvas-bar">
+                <ul class="uk-nav uk-nav-default">
+                    <div class="uk-card uk-card-secondary uk-card-body uk-light">
+                        <img src="img/sajiloguitar.png" alt="">
+                    </div>
+                    <li class="uk-nav-header" v-on:click="screenDefault('index')"><span class="uk-margin-right" uk-icon="home"></span> Song List</li>
+                    <li class="uk-nav-divider"></li>
+                    <li class="uk-nav-header" v-on:click="screenDefault('favourite')"><span class="uk-margin-right" uk-icon="heart"></span> Favourits</li>
+                    <li class="uk-nav-divider"></li>
+                    <li class="uk-nav-header" v-on:click="screenDefault('about')"><span class="uk-margin-right" uk-icon="pencil"></span> About</li>
+                </ul>
+            </div>
+        </div>
+        <div>
+            <nav class="uk-navbar uk-navbar-container uk-margin">
+                <div class="uk-navbar-left">
+                    <a href="#offcanvas-slide" class="uk-navbar-toggle" uk-navbar-toggle-icon uk-toggle></a>
+                    <span class="uk-margin-left" v-if="songs.length">{{songs[song_id.id].name}}</span>
+                </div>
+                <div class="uk-navbar-right">
+                    <a v-on:click="addFavourite(song_id.id)" class="uk-margin-right" uk-icon="heart"></a>
+                    <span class="uk-margin-right" v-on:click="showSlider" uk-icon="future"></span>
+                </div>
+            </nav>
+        </div>
+        <div class="uk-card-body" v-if="slider">
+            <div class="uk-grid">
+                <div class="uk-width-5-6">
+                    <input class="uk-range" type="range" value="5" min="1" max="10" step="1" v-model="scrollValue" style="transform: rotateY(180deg);">
+                </div>
+                <div class="uk-width-1-6">
+                    <span class="uk-margin-right" uk-icon="play" v-if="!showCloseIcon" v-on:click="autoScroll"></span>
+                    <span class="uk-margin-right" uk-icon="close" v-if="showCloseIcon" v-on:click="stopAutoScroll"></span>
+                </div>
+            </div>
+        </div>
+        <div class="uk-card uk-card-default uk-width-1">
+            <div class="uk-card-header">
+                <div class="uk-grid-small uk-flex-middle" uk-grid>
+                    <div class="uk-width-auto">
+                        <img class="uk-border-circle" width="40" height="40" v-bind:src="'img/' + songs[song_id.id].image">
+                    </div>
+                    <div class="uk-width-expand">
+                        <h3 class="uk-card-title uk-margin-remove-bottom" v-if="songs.length">{{songs[song_id.id].name}}</h3>
+                        <p class="uk-text-meta uk-margin-remove-top"><span v-if="songs.length">{{songs[song_id.id].band}}</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-card-body">
+                <h5>Beat: {{ songs[song_id.id].beat }}</h5>
+                <h5>Strum: {{ songs[song_id.id].strum }}</h5>
+                <pre style="margin-left: -161px !important;border: none !important;">
+                    {{ songs[song_id.id].cords }}
+                </pre>
+            </div>
+            <div class="uk-card-footer">
+                <h3>Watch Video</h3>
+                <iframe v-bind:src="songs[song_id.id].url" width="560" height="315" frameborder="0" allowfullscreen uk-responsive uk-video="autoplay: false"></iframe>
+            </div>
+        </div>
+    </div>
+    <script src="js/vue.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/uikit.min.js"></script>
+    <script src="js/uikit-icons.min.js"></script>
+</body>
+</html>

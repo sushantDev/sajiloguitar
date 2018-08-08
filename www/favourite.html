@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Sajilo Guitar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="css/uikit.min.css" />
+</head>
+<body>
+    <div id="app">
+        <div id="offcanvas-slide" uk-offcanvas>
+            <div class="uk-offcanvas-bar">
+                <ul class="uk-nav uk-nav-default">
+                    <div class="uk-card uk-card-secondary uk-card-body uk-light">
+                        <img src="img/sajiloguitar.png" alt="">
+                    </div>
+                    <li class="uk-nav-header" v-on:click="screenDefault('index')"><span class="uk-margin-right" uk-icon="home"></span> Song List</li>
+                    <li class="uk-nav-divider"></li>
+                    <li class="uk-nav-header" v-on:click="screenDefault('favourite')"><span class="uk-margin-right" uk-icon="heart"></span> Favourits</li>
+                    <li class="uk-nav-divider"></li>
+                    <li class="uk-nav-header" v-on:click="screenDefault('about')"><span class="uk-margin-right" uk-icon="pencil"></span> About</li>
+                </ul>
+            </div>
+        </div>
+        <div>
+            <nav class="uk-navbar uk-navbar-container uk-margin">
+                <div class="nav-overlay uk-navbar-left">
+                    <a href="#offcanvas-slide" class="uk-navbar-toggle" uk-navbar-toggle-icon uk-toggle></a>
+                    <span class="uk-margin-left">Favourites</span>
+                </div>
+                <div class="nav-overlay uk-navbar-right">
+                    <a class="uk-navbar-toggle" uk-search-icon uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
+                </div>
+                <div class="nav-overlay uk-navbar-left uk-flex-1" hidden>
+                    <div class="uk-navbar-item uk-width-expand">
+                        <form class="uk-search uk-search-navbar uk-width-1-1">
+                            <input class="uk-search-input" v-model="search" type="search" placeholder="Search..." autofocus>
+                        </form>
+                    </div>
+                    <a class="uk-navbar-toggle" uk-close uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
+                </div>
+            </nav>
+        </div>
+        <ul class="uk-list uk-list-divider">
+            <li v-for="song in favouritedSongs">
+                <div v-on:click="screen(song.slug)">
+                    <span class="uk-margin-left uk-margin-right" uk-icon="play-circle"></span>
+                    {{song.name}}</br>
+                    <span class="uk-margin-large-left uk-text-muted">{{song.band}}</span>
+                </div>
+            </li>
+            <div v-if="favouritedSongs.length == 0">
+                <div class="uk-card uk-card-body">
+                    <h3 class="uk-card-title">No favourites found!!</h3>
+                    <p>You can create your favourites by going to a particular song and by clicking <span class="uk-margin-right" uk-icon="heart"></span></p>
+                </div>
+            </div>
+        </ul>
+    </div>
+    <script src="js/vue.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/uikit.min.js"></script>
+    <script src="js/uikit-icons.min.js"></script>
+</body>
+</html>
