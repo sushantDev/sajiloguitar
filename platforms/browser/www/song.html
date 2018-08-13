@@ -61,11 +61,9 @@
             <div class="uk-card-body">
                 <h5>Beat: {{ songs[song_id.id].beat }}</h5>
                 <h5>Strum: {{ songs[song_id.id].strum }}</h5>
-                <pre style="border: none !important;">
-                    <xmp style="margin-left: -160px !important;">
-                        {{ songs[song_id.id].cords }}
-                    </xmp>
-                </pre>
+                <xmp>
+                    {{ songs[song_id.id].cords }}
+                </xmp>
             </div>
             <div class="uk-card-footer">
                 <h3>Watch Video</h3>
