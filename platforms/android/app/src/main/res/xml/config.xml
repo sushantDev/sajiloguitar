@@ -37,6 +37,7 @@
         Sushant Sapkota
     </author>
     <content src="index.html" />
+    <splash src="www/res/screen/android/splash.png" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
