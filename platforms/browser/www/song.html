@@ -22,7 +22,7 @@
                 </ul>
             </div>
         </div>
-        <div>
+        <div class="uk-dark">   
             <nav class="uk-navbar uk-navbar-container uk-margin">
                 <div class="uk-navbar-left">
                     <a href="#offcanvas-slide" class="uk-navbar-toggle" uk-navbar-toggle-icon uk-toggle></a>
@@ -35,7 +35,7 @@
                 </div>
             </nav>
         </div>
-        <div class="uk-card-body" v-if="slider">
+        <div class="uk-card-body" v-if="slider" uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
             <div class="uk-grid">
                 <div class="uk-width-5-6">
                     <input class="uk-range" type="range" value="5" min="1" max="10" step="1" v-model="scrollValue" style="transform: rotateY(180deg);">
@@ -62,7 +62,9 @@
                 <h5>Beat: {{ songs[song_id.id].beat }}</h5>
                 <h5>Strum: {{ songs[song_id.id].strum }}</h5>
                 <pre style="margin-left: -161px !important;border: none !important;">
-                    {{ songs[song_id.id].cords }}
+                    <xmp>
+                        {{ songs[song_id.id].cords }}
+                    </xmp>
                 </pre>
             </div>
             <div class="uk-card-footer" >
