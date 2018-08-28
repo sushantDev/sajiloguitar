@@ -16,7 +16,7 @@
                     </div>
                     <li class="uk-nav-header" v-on:click="screenDefault('index')"><span class="uk-margin-right" uk-icon="home"></span> Song List</li>
                     <li class="uk-nav-divider"></li>
-                    <li class="uk-nav-header" v-on:click="screenDefault('favourite')"><span class="uk-margin-right" uk-icon="heart"></span> Favourits</li>
+                    <li class="uk-nav-header" v-on:click="screenDefault('favourite')"><span class="uk-margin-right" uk-icon="heart"></span> Favourites</li>
                     <li class="uk-nav-divider"></li>
                     <li class="uk-nav-header" v-on:click="screenDefault('about')"><span class="uk-margin-right" uk-icon="pencil"></span> About</li>
                 </ul>
@@ -61,9 +61,9 @@
             <div class="uk-card-body">
                 <h5>Beat: {{ songs[song_id.id].beat }}</h5>
                 <h5>Strum: {{ songs[song_id.id].strum }}</h5>
-                <div style="font-family: 'Courier New', monospace;white-space: pre;margin-left: -11.7em;">
+                <pre style="border: none !important;border-radius: 0px !important;margin-left: -11.5em">
                     {{ songs[song_id.id].cords }}
-                </div>
+                </pre>
             </div>
             <div class="uk-card-footer">
                 <h3>Watch Video</h3>
